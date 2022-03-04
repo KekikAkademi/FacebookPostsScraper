@@ -1,34 +1,25 @@
-from FacebookPostsScraper import FacebookPostsScraper as Fps
-from pprint import pprint as pp
 
+from FacebookPostsScraper import FacebookPostsScraper as FPS
+from json import dumps
 
 def main():
-    # Enter your Facebook email and password
-    email = 'YOUR_EMAIL'
+    email    = 'YOUR_EMAIL'
     password = 'YOUR_PASSWORD'
 
-    # Instantiate an object
-    fps = Fps(email, password, post_url_text='Full Story')
+    facebook = FPS(email, password, post_url_text='Daha Fazla')
 
-    # Example with single profile
-    single_profile = 'https://www.facebook.com/BillGates'
-    data = fps.get_posts_from_profile(single_profile)
-    pp(data)
-
-    # Example with multiple profiles
     profiles = [
-        'https://www.facebook.com/zuck',  # User profile
-        'https://www.facebook.com/thepracticaldev',  # Facebook page
-        'https://www.facebook.com/groups/python'  # Facebook group
+        'https://www.facebook.com/groups/202783390107516',
+        "https://www.facebook.com/groups/1590438354504559"
 
     ]
-    data = fps.get_posts_from_list(profiles)
-    pp(data)
+    data = facebook.get_posts_from_list(profiles)
+    str_data = dumps(data, indent=2, ensure_ascii=False, sort_keys=False)
 
-    fps.posts_to_csv('my_posts')  # You can export the posts as CSV document
-    # fps.posts_to_excel('my_posts')  # You can export the posts as Excel document
-    # fps.posts_to_json('my_posts')  # You can export the posts as JSON document
+    print(str_data)
 
+    with open("posts.json", "w", encoding="utf8") as f:
+        f.write(str_data)
 
 if __name__ == '__main__':
     main()

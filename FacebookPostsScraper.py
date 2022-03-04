@@ -1,8 +1,6 @@
 import requests, pickle, os
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, unquote, parse_qs
-import pandas as pd
-import json
 from re import search
 
 ayristir = lambda berisi, gerisi, yazi : search(f'{berisi}(.*){gerisi}', yazi).group(1)
